@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Chivo+Mono:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
+
+@import "tailwindcss";
+@theme {
+  --font-bebas-neue: "Bebas Neue", sans-serif;
+  --font-jetbrains-mono: "JetBrains Mono", monospace;
+  --font-chivo-mono: "Chivo Mono", monospace;
+  --font-oswald: "Oswald", sans-serif;
+  --font-fjalla: "Fjalla One", sans-serif;
+}
