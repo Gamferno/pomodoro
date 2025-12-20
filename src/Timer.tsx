@@ -4,6 +4,8 @@ import { LuBrain, LuCoffee } from "react-icons/lu";
 
 import { MdSkipNext, MdMenu, MdPause, MdPlayArrow } from "react-icons/md";
 
+import pomoSound from './assets/focus.wav';
+import breakSound from './assets/break.wav';
 // interface TimerProps {
 //   pomoTime: number
 //   shortBreak: number
@@ -80,7 +82,7 @@ const Timer = ({
       return () => clearTimeout(timer);
     } else if (time === 0 && toggle) {
       if (status === 0) {
-        new Audio("../assets/break.wav").play();
+        new Audio(breakSound).play();
 
         if (!autoBreak) setPause(true);
         if (count >= longBreakInterval) {
@@ -97,7 +99,7 @@ const Timer = ({
         if (!autoStart) setPause(true);
         setStatus(0);
         setTime(pomoTime);
-        new Audio("../assets/focus.wav").play();
+        new Audio(pomoSound).play();
       }
     }
   }, [
@@ -175,13 +177,13 @@ const Timer = ({
                     setCount(count + 1);
                   }
 
-                  new Audio("../assets/break.wav").play();
+                  new Audio(breakSound).play();
                 } else {
                   if (!autoStart) setPause(true);
                   setTime(pomoTime);
                   setStatus(0);
 
-                  new Audio("../assets/focus.wav").play();
+                  new Audio(pomoSound).play();
                 }
               }}
             />
