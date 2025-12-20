@@ -49,23 +49,22 @@ const Timer = ({
   const statusDict: String[] = ["Focus Time", "Short Break", "Long Break"];
   // const colorList: String[] = ["red", "green", "blue"];
   //
-useEffect(() => {
-  const handleKeyDown = (e: KeyboardEvent) => {
-    // Ignore if user is typing in an input/textarea
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Ignore if user is typing in an input/textarea
 
+      if (e.code === "Space") {
+        e.preventDefault();
+        setPause((prev) => !prev);
+      }
+    };
 
-    if (e.code === "Space") {
-      e.preventDefault();
-      setPause(prev => !prev);
-    }
-  };
+    window.addEventListener("keydown", handleKeyDown);
 
-  window.addEventListener("keydown", handleKeyDown);
-
-  return () => {
-    window.removeEventListener("keydown", handleKeyDown);
-  };
-},[]);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   useEffect(() => {
     if (status === 0) setTime(pomoTime);
@@ -81,7 +80,7 @@ useEffect(() => {
       return () => clearTimeout(timer);
     } else if (time === 0 && toggle) {
       if (status === 0) {
-        new Audio("./assets/break.wav").play();
+        new Audio("../assets/break.wav").play();
 
         if (!autoBreak) setPause(true);
         if (count >= longBreakInterval) {
@@ -98,7 +97,7 @@ useEffect(() => {
         if (!autoStart) setPause(true);
         setStatus(0);
         setTime(pomoTime);
-        new Audio("./assets/focus.wav").play();
+        new Audio("../assets/focus.wav").play();
       }
     }
   }, [
@@ -120,7 +119,6 @@ useEffect(() => {
     <div
       tabIndex={0}
       className={`flex place-content-center place-items-center w-screen h-screen ${status == 0 ? "bg-red-100" : status == 1 ? "bg-green-100" : "bg-blue-100"}`}
-
     >
       <div id="main" className="flex flex-col place-content-center ">
         <div id="status" className="w-full flex flex-row place-content-center">
@@ -177,13 +175,13 @@ useEffect(() => {
                     setCount(count + 1);
                   }
 
-                  new Audio("./assets/break.wav").play();
+                  new Audio("../assets/break.wav").play();
                 } else {
                   if (!autoStart) setPause(true);
                   setTime(pomoTime);
                   setStatus(0);
 
-                  new Audio("./assets/focus.wav").play();
+                  new Audio("../assets/focus.wav").play();
                 }
               }}
             />
