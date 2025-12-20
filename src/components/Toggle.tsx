@@ -1,9 +1,18 @@
-import React from "react";
+interface checkedProps {
+  checked: boolean;
+  setChecked: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-const Switch = () => {
+const Switch = ({ checked, setChecked }: checkedProps) => {
   return (
-    <label className="relative inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-300 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-orange-900">
-      <input className="peer sr-only" id="AcceptConditions" type="checkbox" />
+    <label className="relative inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-300 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-amber-600">
+      <input
+        className="peer sr-only"
+        id="AcceptConditions"
+        type="checkbox"
+        checked={checked}
+        onClick={() => setChecked(!checked)}
+      />
       <span className="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-300 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent" />
     </label>
   );

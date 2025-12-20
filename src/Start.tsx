@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ImCross } from "react-icons/im";
 import Switch from "./components/Toggle";
 
@@ -14,6 +14,10 @@ interface StartProps {
   setToggle: React.Dispatch<React.SetStateAction<boolean>>;
   longBreakInterval: number;
   setLongBreakInterval: React.Dispatch<React.SetStateAction<number>>;
+  autoStart: boolean;
+  setAutoStart: React.Dispatch<React.SetStateAction<boolean>>;
+  autoBreak: boolean;
+  setAutoBreak: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Start = ({
@@ -27,80 +31,110 @@ const Start = ({
   setToggle,
   longBreakInterval,
   setLongBreakInterval,
+  autoStart,
+  setAutoStart,
+  autoBreak,
+  setAutoBreak,
 }: StartProps) => {
   return (
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
-      <div className="bg-stone-900  text-white ">
-        <div className="flex place-items-center place-content-center p-5">
-          <div>
-            <h1>Setting</h1>
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-120 scale-105">
+      <div className="bg-stone-900  text-white font-jetbrains-mono p-4 ">
+        <div className="flex place-items-center place-content-center">
+          <div className="flex flex-row justify-between w-full p-4 place-items-center">
+            <button id="empty" className="invisible">
+              {" "}
+              <ImCross />
+            </button>
+            <h1 className="">SETTING</h1>
             <button
-              className=" absolute right-0"
-              onClick={() => {setPomoTime(pomoTime); setToggle(!toggle); }}
+              className=""
+              onClick={() => {
+                setPomoTime(pomoTime);
+                setToggle(!toggle);
+              }}
             >
               <ImCross />
             </button>
           </div>
         </div>
 
-        <div id="setting-portion" className="bg-stone-900 mx-5">
-          <h1>Time(minutes)</h1>
-          <div id="TimerSetting" className="flex justify-between">
-            <div id="pomo" className="flex-col">
-              <label>Pomodoro</label>
+        <hr className="mb-6 text-amber-300"/>
+        
+
+        <div id="setting-portion" className="bg-stone-900 rounded-full ">
+          <h1 className="mx-4 text-lg">Time(minutes)</h1>
+          <div
+            id="TimerSetting"
+            className="flex justify-between gap-3 px-4 py-3"
+          >
+            <div id="pomo" className="flex flex-col flex-1 space-y-1">
+              <label className="text-stone-200">Pomodoro</label>
               <input
                 type="number"
                 value={pomoTime}
                 onChange={(e) => setPomoTime(Number(e.target.value))}
-                className="bg-stone-800 p-2"
+                className="bg-stone-800 w-full p-3"
               />
             </div>
 
-            <div id="short_break" className="flex-col">
-              <label className="">Short Break</label>
+            <div id="short_break" className="flex flex-col flex-1 space-y-1">
+              <label className="text-stone-200">Short Break</label>
               <input
                 type="number"
                 name=""
                 id="shortB"
-                className="bg-stone-800 p-2"
+                className="bg-stone-800 w-full p-3"
                 value={shortBreak}
                 onChange={(e) => setShortBreak(Number(e.target.value))}
               />
             </div>
 
-            <div id="long_break" className="flex-col mr-2 ml-2">
-              <label className=""> Long Break </label>
+            <div id="long_break" className="flex flex-col flex-1 space-y-1">
+              <label className="text-stone-200"> Long Break </label>
               <input
                 type="number"
                 id="longB"
-                className="bg-stone-800 p-2 "
+                className="bg-stone-800 w-full p-3"
                 value={longBreak}
                 onChange={(e) => setLongBreak(Number(e.target.value))}
               />
             </div>
           </div>
 
-          <div id="AutoStartBreaks" className="flex justify-between m-5">
-            <h1>Auto Start Breaks</h1>
-            <Switch />
-          </div>
-          <div id="AutoStartPomo" className="flex justify-between m-5">
-            <h1>Auto Start Pomodoros</h1>
-            <Switch />
-          </div>
+          <div id="otherTimerSettings" className="">
+            <div
+              id="AutoStartBreaks"
+              className="flex justify-between p-4 place-items-center text-lg"
+            >
+              <h1>Auto Start Breaks</h1>
+              <button>
+                <Switch checked={autoBreak} setChecked={setAutoBreak} />
+              </button>
+            </div>
+            <div
+              id="AutoStartPomo"
+              className="flex justify-between p-4 place-items-center text-lg"
+            >
+              <h1>Auto Start Pomodoros</h1>
+              <Switch checked={autoStart} setChecked={setAutoStart} />
+            </div>
 
-          <div id="LongBreakInterval" className="flex justify-between m-5">
-            <label>Long Break Interval</label>
-            <input
-              type="number"
-              name="long_break_interval"
-              id=""
-              className="bg-stone-800 p-2"
-              onChange={(e) => {
-                setLongBreakInterval(Number(e.target.value));
-              }}
-            />
-            <h1>{longBreakInterval}</h1>
+            <div
+              id="LongBreakInterval"
+              className="flex justify-between p-4 place-items-center text-lg"
+            >
+              <label>Long Break Interval</label>
+              <input
+                type="number"
+                name="long_break_interval"
+                id=""
+                className="bg-stone-800 p-3 w-25 h-10"
+                value={longBreakInterval}
+                onChange={(e) => {
+                  setLongBreakInterval(Number(e.target.value));
+                }}
+              />
+            </div>
           </div>
         </div>
       </div>
